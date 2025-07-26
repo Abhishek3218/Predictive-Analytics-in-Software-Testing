@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Analytics in Software Testing</title>
+    <style>
+        :root {
+            --neon-color: #0ff;
+            --neon-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0c0c0c;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--neon-color);
+            text-shadow: var(--neon-shadow);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: var(--neon-shadow);
+            }
+            to {
+                text-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
+            }
+        }
+
+        .floating-cube {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 255, 255, 0.1);
+            animation: float 10s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotateX(0) rotateY(0);
+            }
+            50% {
+                transform: translateY(-50px) rotateX(180deg) rotateY(180deg);
+            }
+        }
+
+        .details-panel {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .details-panel h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .details-panel ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .details-panel li {
+            margin: 8px 0;
+        }
+
+        .details-panel a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .details-panel a:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        .update-badge {
+            font-size: 12px;
+            background: #4CAF50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+        }
+
+        .last-updated {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .resource-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            background: white;
+            transition: background-color 0.3s;
+        }
+
+        .resource-item:hover {
+            background: #e9e9e9;
+        }
+
+        .new-resource {
+            position: relative;
+        }
+
+        .new-resource::after {
+            content: 'NEW';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ff4081;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            background: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-cube"></div>
+    <div class="hero">
+        <div class="container">
+            <h1 class="title">Predictive Analytics in Software Testing</h1>
+            <div class="card-container">
+                <div class="card" onclick="showDetails('ai-testing')">
+                    <img src="https://img.freepik.com/free-vector/people-analyzing-financial-charts-virtual-interface_1262-19289.jpg?t=st=1739374364~exp=1739377964~hmac=4fac695f58a9e3a1e9e75ecdcc13838545667e2f9b544327fb88673f092f045b&w=900" alt="Testing Analytics">
+                    <h2>AI-Powered Testing</h2>
+                    <p>Leverage machine learning algorithms to predict potential software defects and optimize testing processes. AI models analyze code patterns, identify high-risk areas, and suggest targeted testing strategies. This proactive approach helps detect issues earlier in the development cycle, reducing costs and improving software quality.</p>
+                    <div id="ai-testing" class="details-panel">
+                        <button class="close-btn" onclick="closeDetails('ai-testing')">×</button>
+                        <h3>Global AI Testing Resources <span class="update-badge">Auto-updating</span></h3>
+                        <div class="resource-list" data-category="ai-testing"></div>
+                        <div class="last-updated">Last updated: <span id="ai-testing-timestamp"></span></div>
+                    </div>
+                </div>
+                <div class="card" onclick="showDetails('data-analytics')">
+                    <img src="https://img.freepik.com/free-vector/hand-drawn-flat-design-website-hosting-illustration_23-2149258057.jpg?t=st=1739374323~exp=1739377923~hmac=33098c9494f49c0f540bdd693faf2abe24a6e7ad67bc6b4202cbc3fca272acba&w=740" alt="Data Analytics">
+                    <h2>Data-Driven Insights</h2>
+                    <p>Analyze historical test data to identify patterns and improve testing efficiency. By examining past test results, code changes, and defect reports, teams can make informed decisions about test coverage, resource allocation, and risk assessment. These insights lead to more effective test planning and execution strategies.</p>
+                    <div id="data-analytics" class="details-panel">
+                        <button class="close-btn" onclick="closeDetails('data-analytics')">×</button>
+                        <h3>Analytics Tools & Resources <span class="update-badge">Auto-updating</span></h3>
+                        <div class="resource-list" data-category="data-analytics"></div>
+                        <div class="last-updated">Last updated: <span id="data-analytics-timestamp"></span></div>
+                    </div>
+                </div>
+                <div class="card" onclick="showDetails('automated-testing')">
+                    <img src="https://img.freepik.com/free-vector/collaborative-robotics-abstract-concept-illustration-collaborative-artificial-intelligence-manufacturing-robotics-cobot-automatization-safe-industry-solutions_335657-491.jpg?t=st=1739374404~exp=1739378004~hmac=69bbc58fea1193d3de62c9d2131f416bbd4176c5105bc45ae6e81183ec6c2159&w=740" alt="Automated Testing">
+                    <h2>Automated Testing</h2>
+                    <p>Implement automated testing solutions with predictive capabilities for faster and more accurate results. Automation combined with AI can dynamically adjust test scenarios, prioritize test cases based on risk factors, and maintain test scripts through self-healing mechanisms. This results in reduced manual effort, faster feedback cycles, and improved test coverage.</p>
+                    <div id="automated-testing" class="details-panel">
+                        <button class="close-btn" onclick="closeDetails('automated-testing')">×</button>
+                        <h3>Automation Resources <span class="update-badge">Auto-updating</span></h3>
+                        <div class="resource-list" data-category="automated-testing"></div>
+                        <div class="last-updated">Last updated: <span id="automated-testing-timestamp"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add 3D parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card');
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+
+                const angleX = (mouseY - cardY) / 30;
+                const angleY = (mouseX - cardX) / -30;
+
+                card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(20px)`;
+            });
+        });
+
+        // Create multiple floating cubes
+        for (let i = 0; i < 5; i++) {
+            const cube = document.createElement('div');
+            cube.className = 'floating-cube';
+            cube.style.left = `${Math.random() * 100}vw`;
+            cube.style.top = `${Math.random() * 100}vh`;
+            cube.style.animationDelay = `${Math.random() * 5}s`;
+            document.body.appendChild(cube);
+        }
+
+        // Resource data store
+        const resourceDatabase = {
+            'ai-testing': [
+                { url: 'https://www.selenium.dev/documentation/en/', title: 'Selenium with AI Integration', isNew: false },
+                { url: 'https://testim.io/', title: 'Testim.io - AI-Based Testing Platform', isNew: false },
+                { url: 'https://www.perfecto.io/', title: 'Perfecto - AI-Driven Testing Cloud', isNew: false },
+                { url: 'https://www.functionize.com/', title: 'Functionize - AI Testing Tools', isNew: false }
+            ],
+            'data-analytics': [
+                { url: 'https://analytics.google.com/', title: 'Google Analytics for Testing', isNew: false },
+                { url: 'https://www.elastic.co/kibana/', title: 'Kibana Analytics Platform', isNew: false },
+                { url: 'https://www.splunk.com/', title: 'Splunk for Test Analytics', isNew: false },
+                { url: 'https://grafana.com/', title: 'Grafana Dashboards', isNew: false }
+            ],
+            'automated-testing': [
+                { url: 'https://www.cypress.io/', title: 'Cypress Testing Framework', isNew: false },
+                { url: 'https://www.katalon.com/', title: 'Katalon Studio', isNew: false },
+                { url: 'https://www.tricentis.com/products/automate', title: 'Tricentis Tosca', isNew: false },
+                { url: 'https://www.microfocus.com/en-us/products/uft-one/overview', title: 'Micro Focus UFT', isNew: false }
+            ]
+        };
+
+        // Function to update resources
+        async function updateResources() {
+            try {
+                // Simulate API call to get updated resources
+                const response = await fetch('https://api.example.com/testing-resources');
+                const newResources = await response.json();
+                
+                // Update the resource database with new items
+                Object.keys(newResources).forEach(category => {
+                    newResources[category].forEach(resource => {
+                        if (!resourceDatabase[category].find(r => r.url === resource.url)) {
+                            resource.isNew = true;
+                            resourceDatabase[category].push(resource);
+                        }
+                    });
+                });
+            } catch (error) {
+                console.log('Using cached resources');
+            }
+            
+            // Update UI for each category
+            Object.keys(resourceDatabase).forEach(category => {
+                updateResourceList(category);
+                updateTimestamp(category);
+            });
+        }
+
+        // Function to update resource list UI
+        function updateResourceList(category) {
+            const container = document.querySelector(`[data-category="${category}"]`);
+            container.innerHTML = '';
+            
+            const ul = document.createElement('ul');
+            resourceDatabase[category].forEach(resource => {
+                const li = document.createElement('li');
+                li.className = `resource-item ${resource.isNew ? 'new-resource' : ''}`;
+                li.innerHTML = `<a href="${resource.url}" target="_blank">${resource.title}</a>`;
+                ul.appendChild(li);
+            });
+            
+            container.appendChild(ul);
+        }
+
+        // Function to update timestamp
+        function updateTimestamp(category) {
+            const timestamp = document.getElementById(`${category}-timestamp`);
+            timestamp.textContent = new Date().toLocaleString();
+        }
+
+        // Function to show/hide details
+        function showDetails(id) {
+            const panels = document.getElementsByClassName('details-panel');
+            for (let panel of panels) {
+                panel.style.display = 'none';
+            }
+            const panel = document.getElementById(id);
+            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Add new close function to the script section
+        function closeDetails(id) {
+            const panel = document.getElementById(id);
+            panel.style.display = 'none';
+            event.stopPropagation(); // Prevent event bubbling to parent card
+        }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial update
+            updateResources();
+            
+            // Set up periodic updates (every 6 hours)
+            setInterval(updateResources, 6 * 60 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>
